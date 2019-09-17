@@ -1,5 +1,6 @@
 const Board = require("./Board.js");
 const HumanPlayer = require("/HumanPlayer.js");
+const hangManPics = require("./words.js");
 
 class Game {
     constructor() {
@@ -46,7 +47,11 @@ class Game {
             output .push( char ? char : "_")
         }
 
+        console.log(hangManPics.reverse()[this.guessesRemaining]);
+
         console.log(output.join(" "))
+
+       
     }
 
 
