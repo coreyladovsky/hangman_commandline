@@ -1,6 +1,13 @@
+const Board = require("./board.js");
+
 class Game {
     constructor() {
-        this._secret_word = this.selectSecretWord();
+        this.board = new Board();
+        
+    }
+
+    play() {
+
     }
 
 

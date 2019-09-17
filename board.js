@@ -11,4 +11,21 @@ class Board {
     const index = Math.floor(Math.random() * allTheWords.length);
     return allTheWords[index];
   }
+
+  includes(char) {
+      return this._secretWord.includes(char)
+  }
+
+  addChar(char) {
+          for(let i = 0; i < this.board.length; i++) {
+              if(this._secretWord[i] === char) {
+                  this.board[i] = char; 
+              }
+          }
+  }
+
+
+
 }
+
+module.exports = Board; 
