@@ -1,6 +1,6 @@
 const Board = require("./Board.js");
-const HumanPlayer = require("/HumanPlayer.js");
-const hangManPics = require("./words.js");
+const HumanPlayer = require("./HumanPlayer.js");
+const { hangManPics } = require("./words.js");
 
 class Game {
     constructor() {
@@ -17,14 +17,14 @@ class Game {
             if(this.isValidGuess(guess)) {
                 this.addGuess(guess);
                 this.board.addChar(guess);
-                this.guessesRemaining--
+                if(!this.board.includes(guess)) this.guessesRemaining--;
             }
         }
 
         if(this.guessesRemaining) {
             console.log("Congratulations! You Win! ")
         } else {
-            console.log("You Lose, better luck next time")
+            console.log("You Lose, the word was ", this.board.reveal() )
         }
     }
 
@@ -41,14 +41,15 @@ class Game {
     }
 
     displayBoard() {
-        let output = []
-        for(let i = 0; i < this.board.length; i++) {
+        console.clear();
+        let output = [];
+        for(let i = 0; i < this.board.length(); i++) {
             let char = this.board.get(i);
-            output .push( char ? char : "_")
+            output.push( char ? char : "_")
         }
-
-        console.log(hangManPics.reverse()[this.guessesRemaining]);
-
+        console.log("Already Guessed: ", ...this.alreadyGuessed)
+        console.log(hangManPics[this.guessesRemaining]);
+        
         console.log(output.join(" "))
 
        

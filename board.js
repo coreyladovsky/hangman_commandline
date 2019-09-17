@@ -3,13 +3,14 @@ const { dictionary } = require("./words.js")
 class Board {
   constructor() {
     this._secretWord = this.selectSecretWord();
-    this.board = new Array(_secretWord.length);
+    this.board;
   }
 
   selectSecretWord() {
     const allTheWords = dictionary;
     const index = Math.floor(Math.random() * allTheWords.length);
-    return allTheWords[index];
+    this.board = new Array(allTheWords[index].length).fill(null)
+    return allTheWords[index].toLowerCase();
   }
 
   isComplete() {
@@ -34,6 +35,10 @@ class Board {
 
   get(idx) {
     return this.board[idx]
+  }
+
+  reveal() {
+    return this._secretWord;
   }
 
 
