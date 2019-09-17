@@ -3,22 +3,20 @@ const { dictionary } = require("./words.js")
 class Board {
   constructor() {
     this._secretWord = this.selectSecretWord();
-    this.board;
+    this.board = new Array(this._secretWord.length).fill(null);
   }
-
+  
   selectSecretWord() {
-    const allTheWords = dictionary;
-    const index = Math.floor(Math.random() * allTheWords.length);
-    this.board = new Array(allTheWords[index].length).fill(null)
-    return allTheWords[index].toLowerCase();
+    const randomIndex = Math.floor(Math.random() * dictionary.length);
+    return dictionary[randomIndex].toLowerCase();
   }
 
   isComplete() {
-    return this.board.every(el => !!el);
+    return this.board.every(el => el); // checking to see that all have positive value 
   }
 
   includes(char) {
-      return this._secretWord.includes(char)
+      return this._secretWord.includes(char);
   }
 
   addChar(char) {

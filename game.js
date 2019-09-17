@@ -29,7 +29,7 @@ class Game {
     }
 
     isValidGuess(char) {
-        return char.length === 1 && char.match(/[a-z]/i) && !this.alreadyGuessed.has(char)
+        return char.length === 1 && char.match(/[a-z]/i) && !this.alreadyGuessed.has(char) //only valid with alphabet chars that haven't already been guessed. 
     }
 
     addGuess(char) {
@@ -43,16 +43,15 @@ class Game {
     displayBoard() {
         console.clear();
         let output = [];
+
         for(let i = 0; i < this.board.length(); i++) {
             let char = this.board.get(i);
             output.push( char ? char : "_")
         }
-        console.log("Already Guessed: ", ...this.alreadyGuessed)
-        console.log(hangManPics[this.guessesRemaining]);
         
-        console.log(output.join(" "))
-
-       
+        console.log("Already Guessed: ", ...this.alreadyGuessed)
+        console.log(hangManPics[this.guessesRemaining]);       
+        console.log(output.join(" ")) 
     }
 
 
