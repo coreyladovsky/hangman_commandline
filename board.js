@@ -12,6 +12,10 @@ class Board {
     return allTheWords[index];
   }
 
+  isComplete() {
+    return this.board.every(el => !!el);
+  }
+
   includes(char) {
       return this._secretWord.includes(char)
   }
@@ -23,6 +27,15 @@ class Board {
               }
           }
   }
+
+  length() {
+    return this.board.length;
+  }
+
+  get(idx) {
+    return this.board[idx]
+  }
+
 
 
 
