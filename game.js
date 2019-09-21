@@ -3,9 +3,10 @@ const HumanPlayer = require("./HumanPlayer.js");
 const { hangManPics } = require("./words.js");
 
 class Game {
-    constructor() {
-        this.board = new Board();
-        this.humanPlayer = new HumanPlayer();
+    constructor(players) {
+        this.guesser = players.guesser;
+        this.referee = players.referee;
+        this.board = new Board(this.referee.selectSecretWord());
         this.guessesRemaining = 6;
         this.alreadyGuessed = new Set(); 
     }
@@ -13,11 +14,12 @@ class Game {
     play() {
         while(!this.isGameOver()) {
             this.displayBoard();
-            let guess = this.humanPlayer.getMove();
+            let guess = this.guesser.getMove();
             if(this.isValidGuess(guess)) {
                 this.addGuess(guess);
-                this.board.addChar(guess);
-                if(!this.board.includes(guess)) this.guessesRemaining--;
+                let positions = this.referee.givePositions();
+                this.board.addChar(guess, positions);
+                if(!positions.length) this.guessesRemaining--;
             }
         }
 
