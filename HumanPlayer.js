@@ -41,6 +41,12 @@ class HumanPlayer {
     console.log(output.join(" ")) 
   }
 
+  reveal() {
+      return readlineSync.question(
+        "Congrats on winning! Please reveal your word "
+      ).trim();
+  }
+
 }
 
 module.exports = HumanPlayer; 

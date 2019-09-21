@@ -18,16 +18,16 @@ class Game {
             console.log(hangManPics[this.guessesRemaining]);
             let guess = this.guesser.getMove(this.board);
             if(this.isValidGuess(guess)) {
+                console.clear()
                 this.addGuess(guess);
                 let positions = this.referee.givePositions(guess);
                 this.board.addChar(guess, positions);
-                console.log(positions)
                 if(!positions.length) this.guessesRemaining--;
             } else {
+                console.clear();
                 if(this.alreadyGuessed.has(guess)) {
-                    console.log('====================================');
-                    console.log("Already Guessed! ");
-                    console.log('====================================');
+                    
+                    console.log("You've already guessed that letter! Try Again ");
                 } else {
 
                     console.log("Invalid Guess. Please Try Again with a valid character");
@@ -38,7 +38,9 @@ class Game {
         if(this.guessesRemaining) {
             console.log("Congratulations, Guesser! You Win! ")
         } else {
+            console.log(hangManPics[this.guessesRemaining]);
             console.log("Guesser Loses, the word was ", this.referee.reveal() )
+
         }
     }
 
