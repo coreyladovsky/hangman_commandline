@@ -1,22 +1,15 @@
-// const { dictionary } = require("./words.js")
-
 class Board {
   constructor(length) {
     this.board = new Array(length).fill(null);
   }
 
-
   isComplete() {
-    return this.board.every(el => el); // checking to see that all have positive value 
+    return this.board.every(el => el); // checking to see that all have positive value
   }
 
-  // includes(char) {
-  //     return this._secretWord.includes(char);
-  // }
-
   addChar(char, indicies) {
-    for(let i of indicies) {
-      this.board[i] = char; 
+    for (let i of indicies) {
+      this.board[i] = char;
     }
   }
 
@@ -25,13 +18,12 @@ class Board {
   }
 
   get(idx) {
-    return this.board[idx]
+    return this.board[idx];
   }
 
-  // reveal() {
-  //   return this._secretWord;
-  // }
-
+  show() {
+    return this.board;
+  }
 }
 
 module.exports = Board; 

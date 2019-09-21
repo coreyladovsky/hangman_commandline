@@ -1,32 +1,44 @@
 const Board = require("./Board.js");
-const HumanPlayer = require("./HumanPlayer.js");
+// const HumanPlayer = require("./HumanPlayer.js");
 const { hangManPics } = require("./words.js");
 
 class Game {
     constructor(players) {
         this.guesser = players.guesser;
         this.referee = players.referee;
-        this.board = new Board(this.referee.selectSecretWord());
         this.guessesRemaining = 6;
         this.alreadyGuessed = new Set(); 
     }
-
+    
     play() {
+        this._secretWordCount = this.referee.selectSecretWord()
+        this.board = new Board(this._secretWordCount);
         while(!this.isGameOver()) {
-            this.displayBoard();
-            let guess = this.guesser.getMove();
+            // this.displayBoard();
+            console.log(hangManPics[this.guessesRemaining]);
+            let guess = this.guesser.getMove(this.board);
             if(this.isValidGuess(guess)) {
                 this.addGuess(guess);
-                let positions = this.referee.givePositions();
+                let positions = this.referee.givePositions(guess);
                 this.board.addChar(guess, positions);
+                console.log(positions)
                 if(!positions.length) this.guessesRemaining--;
-            }
+            } else {
+                if(this.alreadyGuessed.has(guess)) {
+                    console.log('====================================');
+                    console.log("Already Guessed! ");
+                    console.log('====================================');
+                } else {
+
+                    console.log("Invalid Guess. Please Try Again with a valid character");
+                }
+                   }
         }
 
         if(this.guessesRemaining) {
-            console.log("Congratulations! You Win! ")
+            console.log("Congratulations, Guesser! You Win! ")
         } else {
-            console.log("You Lose, the word was ", this.board.reveal() )
+            console.log("Guesser Loses, the word was ", this.referee.reveal() )
         }
     }
 
@@ -42,19 +54,19 @@ class Game {
         return this.guessesRemaining <= 0 || this.board.isComplete()
     }
 
-    displayBoard() {
-        console.clear();
-        let output = [];
+    // displayBoard() {
+    //     console.clear();
+    //     let output = [];
 
-        for(let i = 0; i < this.board.length(); i++) {
-            let char = this.board.get(i);
-            output.push( char ? char : "_")
-        }
+    //     for(let i = 0; i < this.board.length(); i++) {
+    //         let char = this.board.get(i);
+    //         output.push( char ? char : "_")
+    //     }
+    //     console.log(output.join(" ")) 
         
-        console.log("Already Guessed: ", ...this.alreadyGuessed)
-        console.log(hangManPics[this.guessesRemaining]);       
-        console.log(output.join(" ")) 
-    }
+    // }
+        // console.log("Already Guessed: ", ...this.alreadyGuessed)
+        // console.log(hangManPics[this.guessesRemaining]);       
 
 
 }
