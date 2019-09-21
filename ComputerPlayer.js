@@ -14,14 +14,19 @@ class ComputerPlayer {
 
   getMove(board) {
     this.dictionary = this.dictionary.filter(word => word.length === board.length());
-    
+    let missed = new Set([...this.guessedChars]);
     
     for (let i = 0; i < board.length(); i++) {
         let char = board.get(i);
         if(char) {
+            missed.delete(char)
             this.dictionary = this.dictionary.filter(word => word[i] === char )
         }
     }
+
+    missed.forEach(char => {
+        this.dictionary = this.dictionary.filter(words => !words.includes(char))
+    })
 
     let letterCounts = {};
 
@@ -39,6 +44,16 @@ class ComputerPlayer {
             guess = char; 
         }
     }
+    
+    while(!guess) {
+        let alph = "abcdefghijklmnopqrstuvwxyz";
+        let rand = Math.floor(Math.random() * alph.length);
+        let char = alph[rand]
+        if(!this.guessedChars.has(char)) {
+            guess = char;
+        }
+    }
+
     this.guessedChars.add(guess)
     return guess; 
   }

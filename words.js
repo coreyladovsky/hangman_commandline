@@ -289,6 +289,7 @@ const dictionary = [
   "head",
   "healthy",
   "hear",
+  "hello",
   "hearing",
   "heart",
   "heat",

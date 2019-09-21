@@ -20,8 +20,10 @@ class HumanPlayer {
     if (!isNaN(letterCount)) return letterCount;
   }
 
-  givePositions(guess) {
-      console.log("The gussed character was: ", guess)
+  givePositions(guess, board, pic) {
+      console.log(pic)
+      console.log(this.displayBoard(board))
+      console.log("The guessed character was: ", guess)
     let positions = readlineSync
       .question(
         "Please enter the places at which the letter occurs seperated by commas. For example if your word is hello and the guess is h you would enter a 1. If the letter was l you would enter 3,4.  If the letter does not occur just hit enter.  "
